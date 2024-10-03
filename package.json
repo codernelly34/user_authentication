@@ -1,0 +1,35 @@
+{
+  "name": "user_authentication",
+  "version": "1.0.0",
+  "description": "User Authentication in Node.js and Express Js (MY FUN PROJECT)",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codernelly34/user_authentication.git"
+  },
+  "keywords": [
+    "Nodejs",
+    "Express",
+    "MongoDB"
+  ],
+  "author": "Coder Nelly",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codernelly34/user_authentication/issues"
+  },
+  "homepage": "https://github.com/codernelly34/user_authentication#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "mongoose": "^8.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
