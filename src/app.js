@@ -1,5 +1,7 @@
 import express from "express";
 
-const app = express()
+const app = express();
 
-export { app };
+const n = 4;
+
+export { app, n };
