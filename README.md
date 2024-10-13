@@ -1,6 +1,10 @@
 # User Authentication Server
 
-This app (server) is built using [Node.js](https://nodejs.org/) and [Express.js](http://expressjs.com/). It is designed to handle user authentication with multiple methods. In addition to local authentication, various OAuth strategies (e.g., Google OAuth, Facebook OAuth, GitHub OAuth) will be implemented. As each method is added, instructions on how to authenticate with them will be provided.
+This app (server) is built using [Node.js](https://nodejs.org/) and
+[Express.js](http://expressjs.com/). It is designed to handle user authentication with multiple
+methods. In addition to local authentication, various OAuth strategies (e.g., Google OAuth, Facebook
+OAuth, GitHub OAuth) will be implemented. As each method is added, instructions on how to
+authenticate with them will be provided.
 
 ## Features
 
@@ -57,9 +61,13 @@ To run the app locally on your PC, follow these steps:
 
 ## Usage
 
-Once the server is running locally, you can begin testing the authentication methods that have been implemented. As more OAuth strategies are added, detailed instructions will be provided on how to use them.
+Once the server is running locally, you can begin testing the authentication methods that have been
+implemented. As more OAuth strategies are added, detailed instructions will be provided on how to
+use them.
 
-**Note:** This app has not been hosted yet. To see the app in action, you must run it locally on your machine. Ensure that the `.env` file is properly configured with the required information, as this is essential for starting the server.
+**Note:** This app has not been hosted yet. To see the app in action, you must run it locally on
+your machine. Ensure that the `.env` file is properly configured with the required information, as
+this is essential for starting the server.
 
 ### API Endpoints
 
