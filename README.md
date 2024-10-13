@@ -22,13 +22,13 @@ To run the app locally on your PC, follow these steps:
 1. Clone the repository:
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/codernelly34/user_authentication.git
    ```
 
 2. Navigate to the project directory:
 
    ```bash
-   cd <project-directory>
+   cd user_authentication
    ```
 
 3. Install the dependencies:
