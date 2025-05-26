@@ -1,6 +1,7 @@
 {
   "name": "user_authentication",
   "version": "1.0.0",
+  "private": "true",
   "description": "User Authentication in Node.js and Express Js (MY FUN PROJECT)",
   "main": "src/server.js",
   "type": "module",
@@ -32,14 +33,7 @@
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
-    "husky": "^9.1.6",
-    "lint-staged": "^15.2.10",
     "nodemon": "^3.1.7",
-    "prettier": "^3.3.3"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx,json,css,md}": [
-      "prettier --write"
-    ]
+    "prettier": "^3.5.3"
   }
 }
