@@ -1,4 +1,3 @@
-import "dotenv/config";
 import mongoose from "mongoose";
 
 const uri = process.env.mongodbURI;
@@ -9,9 +8,10 @@ const connectDB = async () => {
     await mongoose.connect(uri);
     console.log("Successful connecting to DB");
   } catch (err) {
-    console.log("Connection to DB head an error");
+    console.log("Connection to DB head an error \n");
+    console.log(err, "\n");
     process.exit(1);
   }
 };
 
-export { connectDB };
+export default connectDB;
