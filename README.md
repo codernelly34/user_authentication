@@ -1,10 +1,11 @@
 # User Authentication Server
 
 This app (server) is built using [Node.js](https://nodejs.org/) and
-[Express.js](http://expressjs.com/). It is designed to handle user authentication with multiple
-methods. In addition to local authentication, various OAuth strategies (e.g., Google OAuth, Facebook
-OAuth, GitHub OAuth) will be implemented. As each method is added, instructions on how to
-authenticate with them will be provided.
+[Express.js](http://expressjs.com/). It is designed to handle user
+authentication with multiple methods. In addition to local authentication,
+various OAuth strategies (e.g., Google OAuth, Facebook OAuth, GitHub OAuth) will
+be implemented. As each method is added, instructions on how to authenticate
+with them will be provided.
 
 ## Features
 
@@ -61,20 +62,23 @@ To run the app locally on your PC, follow these steps:
 
 ## Usage
 
-Once the server is running locally, you can begin testing the authentication methods that have been
-implemented. As more OAuth strategies are added, detailed instructions will be provided on how to
-use them.
+Once the server is running locally, you can begin testing the authentication
+methods that have been implemented. As more OAuth strategies are added, detailed
+instructions will be provided on how to use them.
 
-**Note:** This app has not been hosted yet. To see the app in action, you must run it locally on
-your machine. Ensure that the `.env` file is properly configured with the required information, as
-this is essential for starting the server.
+**Note:** This app has not been hosted yet. To see the app in action, you must
+run it locally on your machine. Ensure that the `.env` file is properly
+configured with the required information, as this is essential for starting the
+server.
 
 ### API Endpoints
 
 - **Get info about the app (server):**
-  - To get information on how to use the server, make a `GET` request to `/info` or `/`.
+  - To get information on how to use the server, make a `GET` request to `/info`
+    or `/`.
 - **Check server status:**
-  - To check the server's status or performance, make a `GET` request to `/status`.
+  - To check the server's status or performance, make a `GET` request to
+    `/status`.
 
 ### Local Authentication Routes
 
@@ -98,6 +102,23 @@ this is essential for starting the server.
     - **On Success:** Will return the new user object that was just created.
     - **On Error:** Will return and error object describing what happen.
 
+- **Login Endpoint:**
+  - **URL:** `/account/local/login`
+  - **Method:** `POST`
+  - **Description:** Allows users to log in by providing their email and
+    password.
+  - **Request Body:**
+    ```json
+    {
+      "email": "john.doe@example.com",
+      "password": "SecurePassword123"
+    }
+    ```
+  - **Response:**
+  - **On Success:** Will return the user object. and also set auth cookies
+  - **On Error:** Will return and error object describing what happen.
+
 ---
 
-**More features are still under development and will be listed here as they are added.**
+**More features are still under development and will be listed here as they are
+added.**
