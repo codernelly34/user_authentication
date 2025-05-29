@@ -1,51 +1,58 @@
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const usernamePattern = /^[a-zA-Z0-9_]{3,10}$/;
-const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+import Joi from "joi";
+
+const requestBodySchema = Joi.object({
+  firstName: Joi.string().min(3).pattern(/^\S+$/).optional().messages({
+    "string.min": "First name must be at least 3 characters.",
+    "string.empty": "First name is required.",
+    "string.pattern.base": "First name must not contain spaces.",
+  }),
+
+  lastName: Joi.string().min(3).pattern(/^\S+$/).optional().messages({
+    "string.min": "Last name must be at least 3 characters.",
+    "string.empty": "Last name is required.",
+    "string.pattern.base": "Last name must not contain spaces.",
+  }),
+
+  email: Joi.string().email().optional().messages({
+    "string.empty": "Email is required.",
+    "string.email": "Invalid email address.",
+  }),
+
+  password: Joi.string()
+    .min(8)
+    .pattern(/^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/, "password strength")
+    .optional()
+    .messages({
+      "string.empty": "Password is required.",
+      "string.pattern.name":
+        "Password must be at least 8 characters long, with at least one uppercase letter, one number, and one special character.",
+    }),
+
+  confirmPassword: Joi.string().when("password", {
+    is: Joi.exist(),
+    then: Joi.required().valid(Joi.ref("password")).messages({
+      "any.only": "Passwords do not match.",
+      "string.empty": "Please confirm your password.",
+    }),
+    otherwise: Joi.optional(),
+  }),
+});
 
 const verifyRequestBody = (req, res, next) => {
-  const { name, email, username, password, usernameOrEmail } = req.body;
-  console.log(name, email, username, password, usernameOrEmail);
+  // const { firstName, lastName, email, password,confirmPassword } = req.body;
 
-  if (name) {
-    const nameParts = name.trim().split(" ");
-    if (nameParts.length < 2 || nameParts.some((part) => part.length < 3)) {
-      return res.status(400).json({
-        message: "Name must include both first and last names, each at least 3 characters.",
-      });
-    }
+  const { error, value } = requestBodySchema.validate(req.body, { abortEarly: false });
+
+  if (error) {
+    const errors = error.details.reduce((acc, curr) => {
+      acc[curr.path[0]] = curr.message;
+      return acc;
+    }, {});
+
+    return res.status(400).json({ errors });
   }
 
-  if (email) {
-    if (!emailPattern.test(email)) {
-      return res.status(400).json({ message: "Invalid email address." });
-    }
-  }
-
-  if (password) {
-    if (!passwordPattern.test(password)) {
-      return res.status(400).json({
-        message:
-          "Password must be 8+ characters, with uppercase, lowercase, number, and special character.",
-      });
-    }
-  }
-
-  if (username) {
-    if (!usernamePattern.test(username)) {
-      return res.status(400).json({
-        message: "Username must be 3-10 characters, only letters, numbers, and underscores.",
-      });
-    }
-  }
-
-  if (usernameOrEmail) {
-    if (!usernamePattern.test(usernameOrEmail) && !emailPattern.test(usernameOrEmail)) {
-      return res.status(400).json({
-        message: "Enter a valid username or email address.",
-      });
-    }
-  }
-
+  req.validBody = value;
   next();
 };
 
