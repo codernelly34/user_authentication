@@ -20,7 +20,10 @@ const requestBodySchema = Joi.object({
 
   password: Joi.string()
     .min(8)
-    .pattern(/^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/, "password strength")
+    .pattern(
+      /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/,
+      "password strength"
+    )
     .optional()
     .messages({
       "string.empty": "Password is required.",
@@ -28,20 +31,18 @@ const requestBodySchema = Joi.object({
         "Password must be at least 8 characters long, with at least one uppercase letter, one number, and one special character.",
     }),
 
-  confirmPassword: Joi.string().when("password", {
-    is: Joi.exist(),
-    then: Joi.required().valid(Joi.ref("password")).messages({
-      "any.only": "Passwords do not match.",
-      "string.empty": "Please confirm your password.",
-    }),
-    otherwise: Joi.optional(),
+  confirmPassword: Joi.string().valid(Joi.ref("password")).optional().messages({
+    "any.only": "Passwords do not match.",
+    "string.empty": "Please confirm your password.",
   }),
 });
 
 const verifyRequestBody = (req, res, next) => {
   // const { firstName, lastName, email, password,confirmPassword } = req.body;
 
-  const { error, value } = requestBodySchema.validate(req.body, { abortEarly: false });
+  const { error, value } = requestBodySchema.validate(req.body, {
+    abortEarly: false,
+  });
 
   if (error) {
     const errors = error.details.reduce((acc, curr) => {
