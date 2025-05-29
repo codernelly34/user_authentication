@@ -76,6 +76,28 @@ this is essential for starting the server.
 - **Check server status:**
   - To check the server's status or performance, make a `GET` request to `/status`.
 
+### Local Authentication Routes
+
+- **Register Endpoint:**
+
+  - **URL:** `/account/local/register`
+  - **Method:** `POST`
+  - **Description:** Allows users to register by providing their details.
+  - **Request Body:** Should be in JSON or Urlencoded formate. example:
+    ```json
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john.doe@example.com",
+      "password": "SecurePassword123",
+      "confirmPassword": "SecurePassword123"
+    }
+    ```
+  - **Response:**
+
+    - **On Success:** Will return the new user object that was just created.
+    - **On Error:** Will return and error object describing what happen.
+
 ---
 
 **More features are still under development and will be listed here as they are added.**
