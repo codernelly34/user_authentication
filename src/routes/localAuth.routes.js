@@ -1,6 +1,6 @@
 import { Router } from "express";
 import verifyRequestBody from "../middlewares/verifyRequestBody.js";
-import { registerAccount } from "../controllers/localAuth.controller.js";
+import registerAccount from "../controllers/localAuth/registerUser.js";
 
 const localAuthRouter = Router();
 

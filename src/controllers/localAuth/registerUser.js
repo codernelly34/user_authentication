@@ -1,5 +1,5 @@
-import AppError from "../utils/AppError.js";
-import userModel from "../models/user.model.js";
+import AppError from "../../utils/AppError.js";
+import userModel from "../../models/user.model.js";
 import expressAsyncHandler from "express-async-handler";
 import bcrypt from "bcrypt";
 
@@ -52,7 +52,4 @@ const registerAccount = expressAsyncHandler(async (req, res) => {
   res.status(201).json(resBody);
 });
 
-// Sign In
-const loginAccount = expressAsyncHandler(async (req, res) => {});
-
-export { registerAccount, loginAccount };
+export default registerAccount;
