@@ -1,17 +1,21 @@
 import express from "express";
+import privetRoutes from "./routes/privetRoutes.js";
 import errorHandler from "./middlewares/errorHandler.js";
-import serverStatusRoute from "./routes/serverStatus.routes.js";
 import localAuthRouter from "./routes/localAuth.routes.js";
+import serverStatusRoute from "./routes/serverStatus.routes.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
 // Middlewares
 app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
+app.use(cookieParser());
 
 // Routes
 app.use(serverStatusRoute);
 app.use("/account/local", localAuthRouter);
+app.use("/privet", privetRoutes);
 
 // Handle unknown Routes (404 not found)
 app.all("*", (req, res) => {
