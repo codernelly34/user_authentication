@@ -103,6 +103,7 @@ server.
     - **On Error:** Will return and error object describing what happen.
 
 - **Login Endpoint:**
+
   - **URL:** `/account/local/login`
   - **Method:** `POST`
   - **Description:** Allows users to log in by providing their email and
@@ -117,6 +118,17 @@ server.
   - **Response:**
   - **On Success:** Will return the user object. and also set auth cookies
   - **On Error:** Will return and error object describing what happen.
+
+- **Get User Info Endpoint:**
+  - **URL:** `/privet/get-user-info`
+  - **Method:** `GET`
+  - **Description:** Retrieves the authenticated user's information.
+  - **Headers:**
+    - `Cookie`: Must include a valid `accessToken`.
+  - **Response:**
+    - **On Success:** Will return the user object
+    - **On Error:** Will return and error object describing what happen.
+  - **Notes:** This endpoint is protected and requires authentication.
 
 ---
 
