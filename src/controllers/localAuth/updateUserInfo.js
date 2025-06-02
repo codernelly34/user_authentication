@@ -4,7 +4,7 @@ import AppError from "../../utils/AppError.js";
 
 const updateUserInfo = expressAsyncHandler(async (req, res) => {
   const email = req.user;
-  const updateData = req.body;
+  const updateData = req.validBody;
 
   // Check if request body is empty
   if (Object.keys(updateData).length === 0) {

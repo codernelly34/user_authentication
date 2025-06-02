@@ -58,12 +58,20 @@ const refreshAccess = expressAsyncHandler(async (req, res) => {
   }
 
   // Create access and refresh token
-  const createAccessToken = jwt.sign({ email }, process.env.accessTokenKey, {
-    expiresIn: ms("5m"),
-  });
-  const createRefreshToken = jwt.sign({ email }, process.env.refreshTokenKey, {
-    expiresIn: ms("15m"),
-  });
+  const createAccessToken = jwt.sign(
+    { email: userInDB.email },
+    process.env.accessTokenKey,
+    {
+      expiresIn: ms("5m"),
+    }
+  );
+  const createRefreshToken = jwt.sign(
+    { email: userInDB.email },
+    process.env.refreshTokenKey,
+    {
+      expiresIn: ms("15m"),
+    }
+  );
 
   // Save refresh token to user; throw error if save fails
   try {
