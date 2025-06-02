@@ -7,11 +7,12 @@ import refreshAccess from "../controllers/localAuth/refreshAccess.js";
 
 const localAuthRouter = Router();
 
+localAuthRouter.get("/logout", signOut);
+localAuthRouter.get("/refresh-access", refreshAccess);
+
 localAuthRouter.use(verifyRequestBody);
 
 localAuthRouter.route("/register").post(registerAccount);
 localAuthRouter.route("/login").post(loginAccount);
-localAuthRouter.get("/logout", signOut);
-localAuthRouter.get("/refresh-access", refreshAccess);
 
 export default localAuthRouter;
