@@ -30,15 +30,10 @@ const requestBodySchema = Joi.object({
       "string.pattern.name":
         "Password must be at least 8 characters long, with at least one uppercase letter, one number, and one special character.",
     }),
-
-  confirmPassword: Joi.string().valid(Joi.ref("password")).optional().messages({
-    "any.only": "Passwords do not match.",
-    "string.empty": "Please confirm your password.",
-  }),
 });
 
 const verifyRequestBody = (req, res, next) => {
-  // const { firstName, lastName, email, password,confirmPassword } = req.body;
+  // const { firstName, lastName, email, password } = req.body;
 
   const { error, value } = requestBodySchema.validate(req.body, {
     abortEarly: false,

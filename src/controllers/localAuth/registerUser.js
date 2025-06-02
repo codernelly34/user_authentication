@@ -5,13 +5,12 @@ import bcrypt from "bcrypt";
 
 // Sign Up
 const registerAccount = expressAsyncHandler(async (req, res) => {
-  const { firstName, lastName, email, password, confirmPassword } =
-    req.validBody;
+  const { firstName, lastName, email, password } = req.validBody;
 
   // Check if all field (User info) are present if not send error response
-  if (!firstName || !lastName || !email || !password || !confirmPassword) {
+  if (!firstName || !lastName || !email || !password) {
     throw new AppError(
-      "All field are required (first and last name, emails, password and confirmPassword)",
+      "All field are required (first and last name, emails, password)",
       400,
       "ValidationError"
     );
@@ -28,7 +27,7 @@ const registerAccount = expressAsyncHandler(async (req, res) => {
   }
 
   // Hash password
-  const hashPassword = await bcrypt.hash(confirmPassword, 10);
+  const hashPassword = await bcrypt.hash(password, 10);
 
   // Create user
   const newUser = await userModel.create({
