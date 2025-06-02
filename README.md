@@ -119,7 +119,21 @@ server.
   - **On Success:** Will return the user object. and also set auth cookies
   - **On Error:** Will return and error object describing what happen.
 
+- **Logout Endpoint:**
+
+  - **URL:** `/account/local/logout`
+  - **Method:** `GET`
+  - **Description:** Logs out the authenticated user by clearing their access
+    and refresh tokens.
+  - **Response:**
+    - **On Success:** Logout Successful
+  - **On Error:** Will return and error object describing what happen.
+
+  - **Notes:** This endpoint clears cookies and invalidates the refresh token in
+    the database if provided.
+
 - **Get User Info Endpoint:**
+
   - **URL:** `/privet/get-user-info`
   - **Method:** `GET`
   - **Description:** Retrieves the authenticated user's information.
@@ -129,6 +143,36 @@ server.
     - **On Success:** Will return the user object
     - **On Error:** Will return and error object describing what happen.
   - **Notes:** This endpoint is protected and requires authentication.
+
+- **Update User Info Endpoint:**
+
+  - **URL:** `/privet/update-user-info`
+  - **Method:** `PUT`
+  - **Description:** Updates the authenticated user's information.
+  - **Request Body:** Should include the fields to be updated. Example:
+    ```json
+    {
+      "firstName": "Jane",
+      "lastName": "Smith"
+    }
+    ```
+  - **Response:**
+
+    - **On Success:** Will return the user object
+    - **On Error:** Will return and error object describing what happen.
+
+  - **Notes:** This endpoint is protected and requires authentication.
+
+- **Refresh Access Token Endpoint:**
+  - **URL:** `/account/local/refresh-access`
+  - **Method:** `GET`
+  - **Description:** Refreshes the user's access token using a valid refresh
+    token.
+  - **Response:**
+    - **On Success:** Access refreshed
+    - **On Error:** Will return an error object describing what happened.
+  - **Notes:** This endpoint clears the old refresh token and sets new access
+    and refresh tokens in cookies.
 
 ---
 
