@@ -29,6 +29,19 @@ const loginAccount = expressAsyncHandler(async (req, res) => {
     );
   }
 
+  const capitalize = (text = "") =>
+    text.charAt(0).toUpperCase() + text.slice(1);
+
+  if (user && user.provider !== "local") {
+    throw new AppError(
+      `This email is already registered with ${capitalize(
+        user.provider
+      )}. Please log in using your ${capitalize(user.provider)} account.`,
+      404,
+      "UserNotFound"
+    );
+  }
+
   // Compare provided password with stored hashed password; return error if they don't match
   const isPasswordMatch = await bcrypt.compare(password, user.password);
   if (!isPasswordMatch) {
