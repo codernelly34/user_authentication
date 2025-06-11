@@ -120,7 +120,7 @@ server.
 
 - **Logout Endpoint:**
 
-  - **URL:** `/account/local/logout`
+  - **URL:** `/account/logout`
   - **Method:** `GET`
   - **Description:** Logs out the authenticated user by clearing their access
     and refresh tokens.
@@ -163,7 +163,7 @@ server.
   - **Notes:** This endpoint is protected and requires authentication.
 
 - **Refresh Access Token Endpoint:**
-  - **URL:** `/account/local/refresh-access`
+  - **URL:** `/account/refresh-access`
   - **Method:** `GET`
   - **Description:** Refreshes the user's access token using a valid refresh
     token.
