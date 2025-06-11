@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import expressAsyncHandler from "express-async-handler";
 
 import AppError from "../../utils/AppError.js";
+import { capitalize } from "../../utils/utilsFun.js";
 import userModel from "../../models/user.model.js";
 import issueAuthToken from "../../utils/issueAuthToken.js";
 
@@ -27,9 +28,6 @@ const loginAccount = expressAsyncHandler(async (req, res) => {
       "UserNotFound"
     );
   }
-
-  const capitalize = (text = "") =>
-    text.charAt(0).toUpperCase() + text.slice(1);
 
   if (user && user.provider !== "local") {
     throw new AppError(

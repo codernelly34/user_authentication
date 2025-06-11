@@ -3,6 +3,7 @@ import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import userModel from "../models/user.model.js";
 import issueAuthToken from "../utils/issueAuthToken.js";
+import { capitalize } from "../utils/utilsFun.js";
 
 const googleOauthRoutes = Router();
 
@@ -17,8 +18,6 @@ passport.use(
     async (accessToken, refreshToken, profile, done) => {
       try {
         const email = profile._json.email;
-        const capitalize = (text = "") =>
-          text.charAt(0).toUpperCase() + text.slice(1);
         const checkUserInDB = await userModel.findOne({
           email,
         });
