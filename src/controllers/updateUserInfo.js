@@ -1,6 +1,6 @@
 import expressAsyncHandler from "express-async-handler";
-import userModel from "../../models/user.model.js";
-import AppError from "../../utils/AppError.js";
+import userModel from "../models/user.model.js";
+import AppError from "../utils/AppError.js";
 
 const updateUserInfo = expressAsyncHandler(async (req, res) => {
   const email = req.user;

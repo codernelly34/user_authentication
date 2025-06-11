@@ -1,5 +1,5 @@
 import expressAsyncHandler from "express-async-handler";
-import userModel from "../../models/user.model.js";
+import userModel from "../models/user.model.js";
 
 const getUserInfo = expressAsyncHandler(async (req, res) => {
   const email = req.user;
