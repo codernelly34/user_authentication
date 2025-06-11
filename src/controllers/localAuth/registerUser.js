@@ -35,6 +35,7 @@ const registerAccount = expressAsyncHandler(async (req, res) => {
     lastName,
     email,
     password: hashPassword,
+    provider: "local",
   });
 
   // Send error response if unable to create user
