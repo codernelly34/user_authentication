@@ -1,7 +1,7 @@
 import { Router } from "express";
 import verifyAccess from "../middlewares/verifyAccess.js";
-import getUserInfo from "../controllers/localAuth/getUserInfo.js";
-import updateUserInfo from "../controllers/localAuth/updateUserInfo.js";
+import getUserInfo from "../controllers/getUserInfo.js";
+import updateUserInfo from "../controllers/updateUserInfo.js";
 import verifyRequestBody from "../middlewares/verifyRequestBody.js";
 
 const privetRoutes = Router();
