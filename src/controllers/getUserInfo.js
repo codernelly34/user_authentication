@@ -18,6 +18,7 @@ const getUserInfo = expressAsyncHandler(async (req, res) => {
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email,
+    provider: user.provider,
   };
 
   res.status(200).json(resBody);
