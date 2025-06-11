@@ -1,10 +1,8 @@
 import { Router } from "express";
 import passport from "passport";
-import jwt from "jsonwebtoken";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import userModel from "../models/user.model.js";
-import ms from "ms";
-import AppError from "../utils/AppError.js";
+import issueAuthToken from "../utils/issueAuthToken.js";
 
 const googleOauthRoutes = Router();
 
@@ -81,48 +79,7 @@ googleOauthRoutes.get("/redirect", (req, res, next) => {
 
     const { cUser, isNew } = user;
 
-    // Create access and refresh token
-    const createAccessToken = jwt.sign(
-      { email: cUser.email },
-      process.env.accessTokenKey,
-      {
-        expiresIn: ms("5m"),
-      }
-    );
-    const createRefreshToken = jwt.sign(
-      { email: cUser.email },
-      process.env.refreshTokenKey,
-      {
-        expiresIn: ms("15m"),
-      }
-    );
-
-    // Save refresh token to user; throw error if save fails
-    try {
-      cUser.token = createRefreshToken;
-      await cUser.save();
-    } catch (error) {
-      throw new AppError(
-        "We encounter and error while trying to log you into your account. please try again later",
-        500,
-        "ServerError",
-        error
-      );
-    }
-
-    // Set access and refresh tokens as secure, HTTP-only cookies with expiration times
-    res.cookie("accessToken", createAccessToken, {
-      maxAge: ms("5m"),
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-    });
-    res.cookie("refreshToken", createRefreshToken, {
-      maxAge: ms("15m"),
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-    });
+    await issueAuthToken(cUser, res);
 
     if (isNew) {
       return res.status(201).json({
