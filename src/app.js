@@ -5,6 +5,7 @@ import localAuthRouter from "./routes/localAuth.routes.js";
 import serverStatusRoute from "./routes/serverStatus.routes.js";
 import cookieParser from "cookie-parser";
 import googleOauthRoutes from "./routes/googleOauthRoutes.js";
+import accountRoute from "./routes/accountRoutes.js";
 // import facebookOauthRoute from "./routes/facebookOauthRoutes.js";
 
 const app = express();
@@ -16,8 +17,9 @@ app.use(cookieParser());
 
 // Routes
 app.use(serverStatusRoute);
+app.use("/account", accountRoute);
 app.use("/account/local", localAuthRouter);
-app.use("/account/google-auth", googleOauthRoutes);
+app.use("/account/google", googleOauthRoutes);
 // app.use("/account/facebook-auth", facebookOauthRoute);
 app.use("/privet", privetRoutes);
 
