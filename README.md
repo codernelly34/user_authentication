@@ -173,8 +173,3 @@ MIT
 
 **Note:** This server is currently not deployed—run locally to test. Ensure your
 `.env` configuration is correct for local development.
-
----
-
-Let me know if you'd like any specific sections added, or want usage examples
-for any endpoints!
