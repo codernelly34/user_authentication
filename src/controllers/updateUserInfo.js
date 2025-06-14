@@ -9,7 +9,7 @@ const updateUserInfo = expressAsyncHandler(async (req, res) => {
   // Check if request body is empty
   if (Object.keys(updateData).length === 0) {
     throw new AppError(
-      "No update data provided. Please include at least one field to update.",
+      "No update data provided. Please include at least one field to update. (firstName, lastName)",
       400
     );
   }
