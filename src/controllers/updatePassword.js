@@ -10,7 +10,7 @@ const updatePassword = expressAsyncHandler(async (req, res, next) => {
     throw new AppError("Please provide your password", 400);
   }
 
-  const user = await userModel.findOne({ email: req.user });
+  const user = await userModel.findById(req.user);
 
   if (!user) {
     throw new AppError("User not found.", 404);

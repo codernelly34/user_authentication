@@ -3,7 +3,7 @@ import userModel from "../models/user.model.js";
 import AppError from "../utils/AppError.js";
 
 const updateUserInfo = expressAsyncHandler(async (req, res) => {
-  const email = req.user;
+  const id = req.user;
   const updateData = req.validBody;
 
   // Check if request body is empty
@@ -26,8 +26,8 @@ const updateUserInfo = expressAsyncHandler(async (req, res) => {
 
   try {
     const updatedUser = await userModel
-      .findOneAndUpdate(
-        { email },
+      .findByIdAndUpdate(
+        id,
         { $set: updateData },
         { new: true, runValidators: true }
       )

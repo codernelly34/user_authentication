@@ -3,9 +3,11 @@ import userModel from "../models/user.model.js";
 import AppError from "../utils/AppError.js";
 
 const getUserInfo = expressAsyncHandler(async (req, res) => {
-  const email = req.user;
+  const id = req.user;
 
-  const user = await userModel.findOne({ email });
+  const user = await userModel
+    .findById(id)
+    .select("firstName lastName email provider -_id");
 
   if (!user) {
     throw new AppError(
@@ -15,14 +17,7 @@ const getUserInfo = expressAsyncHandler(async (req, res) => {
     );
   }
 
-  const resBody = {
-    firstName: user.firstName,
-    lastName: user.lastName,
-    email: user.email,
-    provider: user.provider,
-  };
-
-  res.status(200).json(resBody);
+  res.status(200).json(user);
 });
 
 export default getUserInfo;
