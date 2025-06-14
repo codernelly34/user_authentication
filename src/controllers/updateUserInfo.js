@@ -14,12 +14,24 @@ const updateUserInfo = expressAsyncHandler(async (req, res) => {
     );
   }
 
-  try {
-    const updatedUser = await userModel.findOneAndUpdate(
-      email,
-      { $set: updateData },
-      { new: true, runValidators: true }
+  // Prevent users from updating their email
+  if (updateData.email || updateData.password) {
+    throw new AppError(
+      "You cannot update your email or password from this endpoint. Please use the dedicated email/password update route. " +
+        "Also, if your account was created using a third-party provider like Google and you wish to update your email, you must first add a password to your account. " +
+        "After doing so, you will no longer be able to log in with Google but with your email and password.",
+      403
     );
+  }
+
+  try {
+    const updatedUser = await userModel
+      .findOneAndUpdate(
+        { email },
+        { $set: updateData },
+        { new: true, runValidators: true }
+      )
+      .select("firstName lastName email provider -_id");
 
     if (!updatedUser) {
       return res.status(404).json({ message: "User not found" });
