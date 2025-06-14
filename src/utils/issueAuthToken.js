@@ -5,14 +5,14 @@ import AppError from "../utils/AppError.js";
 async function issueAuthToken(user, res) {
   // Create access and refresh token
   const createAccessToken = jwt.sign(
-    { email: user.email },
+    { id: user.id },
     process.env.accessTokenKey,
     {
       expiresIn: ms("5m"),
     }
   );
   const createRefreshToken = jwt.sign(
-    { email: user.email },
+    { id: user.id },
     process.env.refreshTokenKey,
     {
       expiresIn: ms("15m"),
