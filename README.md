@@ -129,13 +129,13 @@ _All these endpoints require authentication (valid `accessToken` cookie)._
 
 #### Get User Info
 
-- **GET** `/privet/get-user-info`
+- **GET** `/user/get-user-info`
   - Retrieves the authenticated user's info.
   - **Response:** User object or error.
 
 #### Update User Info
 
-- **PUT** `/privet/update-user-info`
+- **PUT** `/user/update-user-info`
   - Update fields in the authenticated user's profile.
   - **Request body:** Supply only fields you want to update, e.g.:
     ```json
@@ -145,6 +145,36 @@ _All these endpoints require authentication (valid `accessToken` cookie)._
     }
     ```
   - **Response:** Updated user object or error.
+
+#### Update User Email
+
+- **PATCH** `/user/update-user-email`
+
+  - Update the authenticated user's email address.
+  - **Request body:** Provide your password and the new email, e.g.:
+    ```json
+    {
+      "password": "your password",
+      "newEmail": "newemail@gmail.com"
+    }
+    ```
+  - **Response:** success message saying email updated or error.
+
+  #### Update User password
+
+- **PATCH** `/user/update-user-password`
+  - Update the authenticated user's password .
+  - **Request body:** Provide your old password and the new password you want to
+    update to. or if you just want to add a password to you account so you can
+    update your email just provide the password field with your password you
+    want to add, e.g.:
+    ```json
+    {
+      "password": "your password",
+      "newPassword": "your new password"
+    }
+    ```
+  - **Response:** success message saying password updated or error.
 
 ---
 
