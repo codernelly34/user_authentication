@@ -21,7 +21,7 @@ app.use("/account", accountRoute);
 app.use("/account/local", localAuthRouter);
 app.use("/account/google", googleOauthRoutes);
 // app.use("/account/facebook-auth", facebookOauthRoute);
-app.use("/privet", privetRoutes);
+app.use("/user", privetRoutes);
 
 // Handle unknown Routes (404 not found)
 app.all("*", (req, res) => {
