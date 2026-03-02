@@ -80,18 +80,26 @@ googleOauthRoutes.get("/redirect", (req, res, next) => {
 
     await issueAuthToken(cUser, res);
 
+    const userInfo = {
+      firstName: cUser.firstName,
+      lastName: cUser.lastName,
+      email: cUser.email,
+      provider: cUser.provider,
+    };
+
     if (isNew) {
       return res.status(201).json({
         message:
           "Welcome! Your account has been created and you’re now logged in.",
-        cUser,
+        user: { ...userInfo },
       });
     }
 
     // Successful authentication
-    res
-      .status(200)
-      .json({ message: "Welcome back! You’re now logged in.", cUser });
+    res.status(200).json({
+      message: "Welcome back! You’re now logged in.",
+      user: { ...userInfo },
+    });
   })(req, res, next);
 });
 
