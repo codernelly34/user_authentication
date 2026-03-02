@@ -1,3 +1,7 @@
+import dns from "node:dns";
+// Set Node to use Cloudflare DNS
+dns.setServers(["1.1.1.1", "1.0.0.1"]);
+
 import "dotenv/config";
 import app from "./app.js";
 import connectDB from "./utils/connectDB.js";
