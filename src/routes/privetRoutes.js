@@ -5,6 +5,7 @@ import updateUserInfo from "../controllers/updateUserInfo.js";
 import verifyRequestBody from "../middlewares/verifyRequestBody.js";
 import updateEmail from "../controllers/updateEmail.js";
 import updatePassword from "../controllers/updatePassword.js";
+import addPassword from "../controllers/addPassword.js";
 
 const privetRoutes = Router();
 
@@ -17,5 +18,6 @@ privetRoutes.use(verifyRequestBody);
 privetRoutes.put("/update-user-info", updateUserInfo);
 privetRoutes.patch("/update-user-email", updateEmail);
 privetRoutes.patch("/update-user-password", updatePassword);
+privetRoutes.put("/add-password", addPassword);
 
 export default privetRoutes;
