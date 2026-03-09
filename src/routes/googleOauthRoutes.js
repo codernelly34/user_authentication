@@ -42,7 +42,7 @@ passport.use(
           }
 
           // User exists and provider is google → allow login
-          return done(null, { cUser: checkUserInDB });
+          return done(null, { cUser: checkUserInDB, isNew: false });
         }
 
         // If user not found → create new Google account
@@ -73,33 +73,18 @@ googleOauthRoutes.get(
 googleOauthRoutes.get("/redirect", (req, res, next) => {
   passport.authenticate("google", async (err, user, info) => {
     if (err) {
-      return res.status(500).json({ err });
+      return res.redirect(
+        `${process.env.FRONTEND_URL}/dashboard.html?status=error&msg=${encodeURIComponent(err.message || err)}`
+      );
     }
 
     const { cUser, isNew } = user;
 
     await issueAuthToken(cUser, res);
 
-    const userInfo = {
-      firstName: cUser.firstName,
-      lastName: cUser.lastName,
-      email: cUser.email,
-      provider: cUser.provider,
-    };
-
-    if (isNew) {
-      return res.status(201).json({
-        message:
-          "Welcome! Your account has been created and you’re now logged in.",
-        user: { ...userInfo },
-      });
-    }
-
-    // Successful authentication
-    res.status(200).json({
-      message: "Welcome back! You’re now logged in.",
-      user: { ...userInfo },
-    });
+    res.redirect(
+      `${process.env.FRONTEND_URL}/dashboard.html?status=OK&type=${encodeURIComponent(String(isNew))}`
+    );
   })(req, res, next);
 });
 
