@@ -72,9 +72,17 @@ googleOauthRoutes.get(
 // 👇 Google callback
 googleOauthRoutes.get("/redirect", (req, res, next) => {
   passport.authenticate("google", async (err, user, info) => {
-    if (err) {
+    const { error } = req.query;
+    if (error && error === "access_denied") {
       return res.redirect(
-        `${process.env.FRONTEND_URL}/dashboard.html?status=error&msg=${encodeURIComponent(err.message || err)}`
+        `${process.env.FRONTEND_URL}/dashboard.html?status=error`
+      );
+    }
+
+    if (err) {
+      console.log(err);
+      return res.redirect(
+        `${process.env.FRONTEND_URL}/dashboard.html?status=error`
       );
     }
 
